@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AppName</title>
+<link rel="stylesheet" href="./output.css">
+</head>
+<body class="font-sans">
+
+  <!-- Navbar -->
+  <nav class="sticky top-0 bg-white shadow p-4 flex justify-between items-center z-50">
+    <p class="text-xl font-bold">AppName</p>
+
+    <div class="hidden md:flex gap-6">
+      <a href="#">Features</a>
+      <a href="#">Pricing</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <button class="hidden md:block bg-blue-600 text-white px-4 py-2 rounded">Get Started</button>
+
+    <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')" class="md:hidden">
+      ☰
+    </button>
+  </nav>
+
+  <div id="mobileMenu" class="hidden md:hidden flex flex-col gap-2 p-4 bg-gray-100">
+    <a href="#">Features</a>
+    <a href="#">Pricing</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <button class="bg-blue-600 text-white px-4 py-2 rounded">Get Started</button>
+  </div>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8">
+    <div class="flex flex-col lg:flex-row items-center gap-8">
+      <div class="lg:w-1/2">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4">Build Amazing Products Faster</h1>
+        <p class="mb-6">AppName helps your team collaborate, build and launch products without the usual headaches. Everything you need, in one place.</p>
+        <div class="flex gap-4">
+          <button class="bg-white text-blue-600 px-4 py-2 rounded">Start Free Trial</button>
+          <button class="border border-white px-4 py-2 rounded">Watch Demo</button>
+        </div>
+      </div>
+      <div class="lg:w-1/2">
+        <img src="./oip2.png" alt="hero image" class="rounded-lg shadow-lg w-full h-48 md:h-64 lg:h-80 object-cover">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="p-8">
+    <h2 class="text-2xl font-bold text-center mb-8">Powerful Features</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div class="border rounded p-4 hover:shadow-lg">
+        <p class="text-2xl mb-2">⚡</p>
+        <h3 class="font-bold mb-2">Lightning Fast</h3>
+        <p class="text-gray-600">Our platform is built for speed so your team never has to wait around.</p>
+      </div>
+
+      <div class="border rounded p-4 hover:shadow-lg">
+        <p class="text-2xl mb-2">🔒</p>
+        <h3 class="font-bold mb-2">Secure</h3>
+        <p class="text-gray-600">Your data is protected with industry standard security practices.</p>
+      </div>
+
+      <div class="border rounded p-4 hover:shadow-lg">
+        <p class="text-2xl mb-2">📊</p>
+        <h3 class="font-bold mb-2">Analytics</h3>
+        <p class="text-gray-600">Track your progress with simple, easy to understand dashboards.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white p-6">
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-bold">AppName</p>
+      <p class="text-sm text-gray-400">© 2026 AppName. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
