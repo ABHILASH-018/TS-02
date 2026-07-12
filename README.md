@@ -1,121 +1,40 @@
-# TS-02
-# AppName Landing Page
+# TS-2: Responsive Landing Page with Tailwind CSS
 
-A modern, responsive landing page built with **HTML** and **Tailwind CSS v4**.
+## What This Is
 
-## 🚀 Features
+This is a simple SaaS-style landing page I built to learn responsive design using Tailwind CSS v4. It has a sticky navbar, a hero section with a gradient background, feature cards, and a footer. The page works on phones, tablets, and desktops.
 
-- Responsive navigation bar
-- Mobile menu toggle
-- Hero section with CTA buttons
-- Responsive hero image
-- Feature cards with hover effects
-- Sticky navigation
-- Gradient hero background
-- Responsive footer
-- Built using Tailwind CSS v4
+## How I Built It
 
-## 📂 Project Structure
+I started with just the mobile layout since Tailwind is mobile-first. That was confusing at first because I kept thinking "write the desktop version, then shrink it down" but Tailwind works the opposite way — you write the small screen styles first and then add breakpoints like `md:` and `lg:` to change things on bigger screens.
 
-```
-project/
-│── index.html
-│── input.css
-│── output.css
-│── oip2.png
-└── README.md
-```
+The hardest part was the navbar. I wanted the links to show on desktop but hide on mobile and show a hamburger menu instead. I kept getting it wrong because I'd hide something with `hidden` and then forget that `md:flex` brings it back. Once I understood that the breakpoint class *overrides* the base class at that screen size, it clicked.
 
-## 🛠 Technologies Used
+## Responsive Breakpoints I Used
+
+- **`sm:` (640px)** — I used this for the footer so the copyright text sits next to the brand name instead of stacking
+- **`md:` (768px)** — This is where the nav links appear, the hamburger hides, and the feature cards go from 1 column to 3 columns
+- **`lg:` (1024px)** — The hero section switches from stacked (text on top, image below) to side-by-side
+
+I picked these based on testing — on my phone things needed to stack, but on a tablet (around 768px) there was enough room for the nav links and 3-column grid.
+
+## Tailwind Customization
+
+I didn't just use the default Tailwind colors. In `input.css`, I set up custom theme tokens using `@theme` for brand colors, fonts, and spacing. I also created reusable component classes with `@layer components` (like `.btn-primary`) and a custom utility with `@layer utilities` (`.text-gradient`). This helped me understand how Tailwind's layer system works — utilities beat components beat base styles.
+
+## The Hamburger Menu
+
+I originally had an inline `onclick="..."` on the hamburger button. My instructor pointed out that mixing JS in the HTML like that is messy and hard to maintain. So I gave the button an `id` and used `addEventListener` in a script tag at the bottom. It does the same thing (toggles the `hidden` class on the mobile menu) but the code is cleaner and easier to debug.
+
+## What I'd Do Differently
+
+- Add smooth transitions when the mobile menu opens/closes instead of it just popping in
+- Use a real logo image instead of just text
+- Make the feature cards clickable with actual links
+- Try adding a dark mode toggle since Tailwind has built-in dark mode support
+
+## Tech Used
 
 - HTML5
 - Tailwind CSS v4
-- CSS
-
-## 📱 Responsive Design
-
-The website is optimized for:
-
-- Mobile
-- Tablet
-- Desktop
-
-Responsive breakpoints used:
-
-- `md`
-- `lg`
-
-## 🎨 Sections
-
-### Navbar
-- Logo
-- Navigation links
-- Get Started button
-- Mobile hamburger menu
-
-### Hero Section
-- Large heading
-- Description
-- Two call-to-action buttons
-- Hero image
-
-### Features
-- Lightning Fast
-- Secure
-- Analytics
-
-### Footer
-- Company name
-- Copyright information
-
-## ▶️ Getting Started
-
-1. Clone the repository
-
-```bash
-git clone <repository-url>
-```
-
-2. Open the project folder
-
-```bash
-cd project-folder
-```
-
-3. Open `index.html` in your browser.
-
-## Tailwind Development
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Build Tailwind CSS:
-
-```bash
-npx @tailwindcss/cli -i ./input.css -o ./output.css --watch
-```
-
-## 📸 Screenshot
-
-The landing page includes:
-- Responsive navigation
-- Gradient hero section
-- Feature cards
-- Professional layout
-
-## Future Improvements
-
-- Add dark mode
-- Add animations
-- Contact form
-- Pricing section
-- Testimonials
-- FAQ section
-- Smooth scrolling
-
-## License
-
-This project is open source and available under the MIT License.
+- Vanilla JavaScript (for the mobile menu toggle)

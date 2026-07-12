@@ -1,90 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AppName</title>
-<link rel="stylesheet" href="./output.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AppName - Responsive Landing Page</title>
+  <link rel="stylesheet" href="./output.css">
 </head>
-<body class="font-sans">
+<!-- Using the custom font stack defined in input.css (@theme: --font-custom) -->
+<body class="font-custom bg-white text-gray-900 antialiased">
 
-  <!-- Navbar -->
-  <nav class="sticky top-0 bg-white shadow p-4 flex justify-between items-center z-50">
-    <p class="text-xl font-bold">AppName</p>
+  <!-- Navbar
+       - 'sticky top-0': keeps navigation always accessible while scrolling
+       - 'z-50': ensures navigation stays on top of the hero header gradient and images
+  -->
+  <nav class="sticky top-0 bg-white/95 backdrop-blur-md shadow-sm p-4 flex justify-between items-center z-50">
+    <p class="text-xl font-bold text-brand-primary">AppName</p>
 
-    <div class="hidden md:flex gap-6">
-      <a href="#">Features</a>
-      <a href="#">Pricing</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+    <!-- Desktop navigation: 
+         - 'hidden': By default (on mobile/small screens), we hide all the link items to save vertical space.
+         - 'md:flex': Once the viewport reaches the medium breakpoint (768px), we change display to flex.
+         - 'gap-6': Adds spacing between individual nav links without using margins.
+    -->
+    <div class="hidden md:flex gap-6 font-medium text-gray-600">
+      <a href="#" class="hover:text-brand-primary transition-colors">Features</a>
+      <a href="#" class="hover:text-brand-primary transition-colors">Pricing</a>
+      <a href="#" class="hover:text-brand-primary transition-colors">About</a>
+      <a href="#" class="hover:text-brand-primary transition-colors">Contact</a>
     </div>
 
-    <button class="hidden md:block bg-blue-600 text-white px-4 py-2 rounded">Get Started</button>
+    <!-- Desktop CTA:
+         - 'hidden md:block': Hidden on smaller viewports where space is tight, shown on desktop.
+         - 'btn-primary': Reusable component class defined in input.css for consistent buttons.
+    -->
+    <button class="hidden md:block btn-primary">Get Started</button>
 
-    <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')" class="md:hidden">
+    <!-- Mobile menu toggle button:
+         - 'md:hidden': This button is ONLY shown on screens smaller than 768px. Once we are on desktop, it's completely hidden.
+    -->
+    <button id="mobileMenuBtn" class="md:hidden text-2xl focus:outline-none p-1 text-gray-700 hover:text-brand-primary" aria-label="Toggle menu">
       ☰
     </button>
   </nav>
 
-  <div id="mobileMenu" class="hidden md:hidden flex flex-col gap-2 p-4 bg-gray-100">
-    <a href="#">Features</a>
-    <a href="#">Pricing</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-    <button class="bg-blue-600 text-white px-4 py-2 rounded">Get Started</button>
+  <!-- Mobile menu dropdown:
+       - 'hidden': Collapsed by default. Controlled via JavaScript event listener.
+       - 'md:hidden': Even if toggle state is open, this dropdown must hide when window is resized to desktop width.
+       - 'bg-surface-light': Uses custom background token defined in input.css.
+  -->
+  <div id="mobileMenu" class="hidden md:hidden flex flex-col gap-3 p-4 bg-surface-light border-b border-gray-200">
+    <a href="#" class="font-medium text-gray-700 hover:text-brand-primary">Features</a>
+    <a href="#" class="font-medium text-gray-700 hover:text-brand-primary">Pricing</a>
+    <a href="#" class="font-medium text-gray-700 hover:text-brand-primary">About</a>
+    <a href="#" class="font-medium text-gray-700 hover:text-brand-primary">Contact</a>
+    <button class="btn-primary w-full mt-2">Get Started</button>
   </div>
 
-  <!-- Hero -->
-  <section class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8">
-    <div class="flex flex-col lg:flex-row items-center gap-8">
-      <div class="lg:w-1/2">
-        <h1 class="text-3xl md:text-4xl font-bold mb-4">Build Amazing Products Faster</h1>
-        <p class="mb-6">AppName helps your team collaborate, build and launch products without the usual headaches. Everything you need, in one place.</p>
-        <div class="flex gap-4">
-          <button class="bg-white text-blue-600 px-4 py-2 rounded">Start Free Trial</button>
-          <button class="border border-white px-4 py-2 rounded">Watch Demo</button>
+  <!-- Hero Section:
+       - 'bg-gradient-to-r from-brand-primary to-brand-secondary': Combines our custom theme brand colors into a modern gradient backdrop.
+       - 'p-8 md:p-16 lg:p-22': Progressively scales padding for small, medium, and large layouts so the content has appropriate breathing room.
+  -->
+  <section class="bg-gradient-to-r from-brand-primary to-brand-secondary text-white p-8 md:p-16 lg:p-22">
+    <!-- Hero Flex Container:
+         - 'flex flex-col': Vertically stacks the text elements on top of the image for portrait screens (mobile first).
+         - 'lg:flex-row': On larger desktop screens (1024px+), aligns text and image side-by-side horizontally.
+         - 'items-center': Vertically centers the content within the flex containers.
+    -->
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+      
+      <!-- Text Area:
+           - 'lg:w-1/2': Takes up exactly half the width when aligned horizontally on desktop.
+      -->
+      <div class="lg:w-1/2 text-center lg:text-left">
+        <!-- 'text-gradient': Custom utility class in input.css utilizing clipping for a premium look -->
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight text-gradient">
+          Build Amazing Products Faster
+        </h1>
+        <p class="mb-8 text-blue-100 text-lg max-w-lg mx-auto lg:mx-0">
+          AppName helps your team collaborate, build and launch products without the usual headaches. Everything you need, in one place.
+        </p>
+        <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+          <!-- Button styling: Left CTA is custom white flat button, Right CTA uses our custom outline component class -->
+          <button class="bg-white text-brand-primary font-semibold px-6 py-3 rounded-md hover:bg-blue-50 transition-colors shadow-md">
+            Start Free Trial
+          </button>
+          <button class="btn-outline px-6 py-3">
+            Watch Demo
+          </button>
         </div>
       </div>
-      <div class="lg:w-1/2">
-        <img src="./oip2.png" alt="hero image" class="rounded-lg shadow-lg w-full h-48 md:h-64 lg:h-80 object-cover">
+
+      <!-- Image Area:
+           - 'lg:w-1/2': Matches the text area width for a balanced 50/50 split on large screens.
+      -->
+      <div class="lg:w-1/2 w-full">
+        <!-- Progressive image heights:
+             - 'h-48' (mobile) -> 'h-72' (medium) -> 'h-96' (large)
+             - 'object-cover': clips the image nicely to prevent squishing or distortion when dimensions change.
+        -->
+        <img src="./oip2.png" alt="SaaS Application Dashboard Preview" class="rounded-xl shadow-2xl w-full h-48 md:h-72 lg:h-96 object-cover border border-white/10">
       </div>
+
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="p-8">
-    <h2 class="text-2xl font-bold text-center mb-8">Powerful Features</h2>
+  <!-- Features Section -->
+  <section class="max-w-6xl mx-auto py-16 px-8">
+    <h2 class="text-3xl font-bold text-center mb-4 text-gray-900">Powerful Features</h2>
+    <p class="text-gray-500 text-center mb-12 max-w-xl mx-auto">Everything you need to manage your workflows, secure your intellectual property, and track performance.</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Features Responsive Grid:
+         - 'grid-cols-1': On mobile devices, cards stack vertically in a single column to maintain readability.
+         - 'md:grid-cols-3': Once the screen width is 768px and above, they snap into three equal-width columns.
+         - 'gap-8': Standardized gap spacing between columns and rows.
+    -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-      <div class="border rounded p-4 hover:shadow-lg">
-        <p class="text-2xl mb-2">⚡</p>
-        <h3 class="font-bold mb-2">Lightning Fast</h3>
-        <p class="text-gray-600">Our platform is built for speed so your team never has to wait around.</p>
+      <!-- Feature Card 1:
+           - 'feature-card': Reusable component class defined in input.css with shadow and translateY transitions on hover.
+      -->
+      <div class="feature-card bg-white">
+        <div class="w-12 h-12 bg-blue-100 text-brand-primary rounded-lg flex items-center justify-center text-2xl mb-4">
+          ⚡
+        </div>
+        <h3 class="font-bold text-xl mb-2 text-gray-950">Lightning Fast</h3>
+        <p class="text-gray-600 leading-relaxed">Our platform is built for speed so your team never has to wait around for syncs or deployments.</p>
       </div>
 
-      <div class="border rounded p-4 hover:shadow-lg">
-        <p class="text-2xl mb-2">🔒</p>
-        <h3 class="font-bold mb-2">Secure</h3>
-        <p class="text-gray-600">Your data is protected with industry standard security practices.</p>
+      <!-- Feature Card 2 -->
+      <div class="feature-card bg-white">
+        <div class="w-12 h-12 bg-purple-100 text-brand-secondary rounded-lg flex items-center justify-center text-2xl mb-4">
+          🔒
+        </div>
+        <h3 class="font-bold text-xl mb-2 text-gray-950">Secure</h3>
+        <p class="text-gray-600 leading-relaxed">Your data is protected with industry-standard end-to-end encryption and modern security practices.</p>
       </div>
 
-      <div class="border rounded p-4 hover:shadow-lg">
-        <p class="text-2xl mb-2">📊</p>
-        <h3 class="font-bold mb-2">Analytics</h3>
-        <p class="text-gray-600">Track your progress with simple, easy to understand dashboards.</p>
+      <!-- Feature Card 3 -->
+      <div class="feature-card bg-white">
+        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center text-2xl mb-4">
+          📊
+        </div>
+        <h3 class="font-bold text-xl mb-2 text-gray-950">Analytics</h3>
+        <p class="text-gray-600 leading-relaxed">Track your productivity, conversion rates, and server response times in simple real-time dashboards.</p>
       </div>
 
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-white p-6">
-    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-      <p class="font-bold">AppName</p>
+  <footer class="bg-surface-dark text-white py-8 px-8 border-t border-gray-800">
+    <!-- Responsive Footer alignment:
+         - 'flex-col': Stacks copyright under the logo on mobile.
+         - 'sm:flex-row': Aligns them side-by-side horizontally starting at 640px.
+    -->
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-bold text-lg text-brand-primary">AppName</p>
       <p class="text-sm text-gray-400">© 2026 AppName. All rights reserved.</p>
     </div>
   </footer>
 
+  <!-- Native JavaScript Interaction Handler
+       - Uses DOM event listening to decouple behavior from HTML presentation structure.
+       - Toggles class state dynamically to animate/show mobile navigation panel.
+  -->
+  <script>
+    // Safe-query elements from the DOM
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    // Register event listener only if elements are verified to exist on the current page
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        // Toggle the Tailwind utility class 'hidden' to control visibility of the menu block
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  </script>
 </body>
 </html>

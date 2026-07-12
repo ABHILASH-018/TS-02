@@ -1,1 +1,139 @@
 @import "tailwindcss";
+
+/* ============================================================
+   TAILWIND THEME CUSTOMIZATION
+   I'm using @theme to extend Tailwind's default design tokens.
+   These become usable as utility classes automatically —
+   for example, --color-brand-primary becomes bg-brand-primary.
+   ============================================================ */
+@theme {
+  /* Brand Colors
+     I picked blue as the primary because it feels professional/trustworthy
+     for a SaaS product. The secondary purple gives a modern gradient feel
+     when paired with the blue in the hero section. */
+  --color-brand-primary: #2563eb;
+  --color-brand-primary-dark: #1d4ed8;
+  --color-brand-secondary: #9333ea;
+  --color-brand-secondary-dark: #7e22ce;
+
+  /* Neutral/surface colors for cards and backgrounds
+     These are slightly warmer than pure gray — makes the page
+     feel less sterile */
+  --color-surface-light: #f8fafc;
+  --color-surface-dark: #0f172a;
+
+  /* Custom font stack
+     Inter is a clean sans-serif designed for screens.
+     I added system-ui as a fallback so it still looks decent
+     if the font doesn't load. */
+  --font-custom: "Inter", system-ui, sans-serif;
+
+  /* Custom spacing tokens
+     Tailwind's default spacing scale goes in 0.25rem increments.
+     I added a few "in-between" sizes for section padding where
+     the defaults felt too tight or too loose. */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+}
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES (STANDARD :root VARIABLES)
+   These are regular CSS variables — not Tailwind tokens.
+   I use these for values that don't map to Tailwind utilities,
+   like transition speeds and shadow strengths.
+   ============================================================ */
+:root {
+  /* Border radius — I use the same rounded corners everywhere
+     so having one variable makes it easy to tweak globally */
+  --border-radius-card: 0.5rem;
+  --border-radius-btn: 0.375rem;
+
+  /* Transition timing — keeps all hover effects consistent.
+     200ms feels snappy without being jarring. */
+  --transition-speed: 200ms;
+  --transition-easing: ease-in-out;
+
+  /* Shadow values — I defined a subtle and a stronger shadow.
+     The feature cards use the subtle one by default and switch
+     to the stronger one on hover. */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================================
+   @layer components — REUSABLE COMPONENT CLASSES
+   Tailwind's @layer components lets me create classes that sit
+   between base styles and utilities in specificity. This means
+   I can still override them with utility classes if needed.
+   I use these for patterns I repeat multiple times.
+   ============================================================ */
+@layer components {
+  /* Primary button — used for "Get Started" and "Start Free Trial".
+     Instead of repeating bg-brand-primary text-white px-4 py-2 rounded
+     on every button, I defined it once here. */
+  .btn-primary {
+    background-color: var(--color-brand-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-btn);
+    font-weight: 600;
+    transition: background-color var(--transition-speed) var(--transition-easing);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-brand-primary-dark);
+  }
+
+  /* Outline/ghost button — for secondary actions like "Watch Demo"
+     where I want a less prominent button style */
+  .btn-outline {
+    background-color: transparent;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 1px solid white;
+    border-radius: var(--border-radius-btn);
+    font-weight: 600;
+    transition: background-color var(--transition-speed) var(--transition-easing),
+                color var(--transition-speed) var(--transition-easing);
+  }
+
+  .btn-outline:hover {
+    background-color: white;
+    color: var(--color-brand-primary);
+  }
+
+  /* Feature card — wraps each feature with consistent padding,
+     border, and a hover shadow effect. Using the CSS variables
+     I defined in :root so all cards share the same shadow behavior. */
+  .feature-card {
+    border: 1px solid #e2e8f0;
+    border-radius: var(--border-radius-card);
+    padding: 1.5rem;
+    transition: box-shadow var(--transition-speed) var(--transition-easing),
+                transform var(--transition-speed) var(--transition-easing);
+  }
+
+  .feature-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+}
+
+/* ============================================================
+   @layer utilities — CUSTOM UTILITY CLASSES
+   These work just like Tailwind's built-in utilities (highest
+   specificity in the cascade). I created a text-gradient utility
+   because Tailwind doesn't have a single class for gradient text.
+   ============================================================ */
+@layer utilities {
+  /* Text gradient — applies a gradient fill to text.
+     I use this on the hero heading to make it more eye-catching.
+     The trick is background-clip: text + transparent text color
+     so the gradient shows through the letter shapes. */
+  .text-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
